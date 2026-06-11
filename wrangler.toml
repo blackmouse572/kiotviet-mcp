@@ -1,0 +1,30 @@
+name = "kiotviet-mcp"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Optional KV namespace for the token cache. Omit to fall back to
+# in-memory storage (single-isolate cache, no cross-region sharing).
+# [[kv_namespaces]]
+# binding = "KIOTVIET_TOKENS"
+# id = "<fill in via `wrangler kv namespace create KIOTVIET_TOKENS`>"
+
+# Optional Durable Object for cross-isolate single-flight refresh.
+# [[durable_objects.bindings]]
+# name = "TOKEN_REFRESH_AGENT"
+# class_name = "TokenRefreshAgent"
+
+# [[migrations]]
+# tag = "v1"
+# new_classes = ["TokenRefreshAgent"]
+
+[vars]
+KIOTVIET_TOKEN_URL = "https://id.kiotviet.vn/connect/token"
+BEARER_TTL_SECONDS = "7776000"
+# PUBLIC_BASE_URL = "https://kiotviet-mcp.<your-domain>"
+
+# Secrets — set via `wrangler secret put <NAME>`:
+#   MCP_BEARER_PK    (32-byte hex, used to seal envelopes)
+#   MCP_BEARER_SK    (32-byte hex, used to open envelopes)
+#   LINK_HMAC_SECRET (>=16 char shared secret with the trusted backend)
+#   TOKEN_CACHE_KEY  (32-byte hex, optional — wraps KV values with AES-GCM)

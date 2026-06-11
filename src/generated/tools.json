@@ -1,0 +1,3549 @@
+{
+  "generatedAt": "1970-01-01T00:00:00.000Z",
+  "sdk": {
+    "name": "kiotviet-client-sdk"
+  },
+  "tools": [
+    {
+      "name": "bankAccounts.getById",
+      "description": "Get a bank account by its ID",
+      "dispatch": {
+        "namespace": "bankAccounts",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "accountId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "accountId"
+        ]
+      }
+    },
+    {
+      "name": "bankAccounts.list",
+      "description": "List bank accounts with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "bankAccounts",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "BankAccountListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "BankAccountListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "branches.create",
+      "description": "Create a new branch",
+      "dispatch": {
+        "namespace": "branches",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "branchData",
+          "type": "BranchCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "branchData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "BranchCreateParams"
+          }
+        },
+        "required": [
+          "branchData"
+        ]
+      }
+    },
+    {
+      "name": "branches.delete",
+      "description": "Delete a branch",
+      "dispatch": {
+        "namespace": "branches",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "branchId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "branchId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "branchId"
+        ]
+      }
+    },
+    {
+      "name": "branches.getById",
+      "description": "Get a branch by its ID",
+      "dispatch": {
+        "namespace": "branches",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "branchId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "branchId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "branchId"
+        ]
+      }
+    },
+    {
+      "name": "branches.list",
+      "description": "List branches with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "branches",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "BranchListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "BranchListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "branches.update",
+      "description": "Update an existing branch",
+      "dispatch": {
+        "namespace": "branches",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "branchId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "branchData",
+          "type": "Partial<BranchUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "branchId": {
+            "type": "number"
+          },
+          "branchData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "BranchUpdateParams"
+          }
+        },
+        "required": [
+          "branchId",
+          "branchData"
+        ]
+      }
+    },
+    {
+      "name": "cashFlow.list",
+      "description": "Get list of cash flow records",
+      "dispatch": {
+        "namespace": "cashFlow",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "CashFlowListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CashFlowListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "cashFlow.processPayment",
+      "description": "Process payment for an invoice",
+      "dispatch": {
+        "namespace": "cashFlow",
+        "method": "processPayment"
+      },
+      "params": [
+        {
+          "name": "data",
+          "type": "PaymentRequest",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PaymentRequest"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "categories.create",
+      "description": "Create a new category",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "categoryData",
+          "type": "CategoryCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "categoryData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CategoryCreateParams"
+          }
+        },
+        "required": [
+          "categoryData"
+        ]
+      }
+    },
+    {
+      "name": "categories.delete",
+      "description": "Delete a category",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "categoryId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "categoryId"
+        ]
+      }
+    },
+    {
+      "name": "categories.getById",
+      "description": "Get a category by its ID",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "categoryId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "categoryId"
+        ]
+      }
+    },
+    {
+      "name": "categories.getHierarchical",
+      "description": "Get categories with hierarchical structure",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "getHierarchical"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "Omit<CategoryListParams, 'hierarchicalData'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<CategoryListParams, 'hierarchicalData'>"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "categories.list",
+      "description": "List categories with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "CategoryListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CategoryListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "categories.update",
+      "description": "Update an existing category",
+      "dispatch": {
+        "namespace": "categories",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "categoryId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "categoryData",
+          "type": "Partial<CategoryUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "number"
+          },
+          "categoryData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CategoryUpdateParams"
+          }
+        },
+        "required": [
+          "categoryId",
+          "categoryData"
+        ]
+      }
+    },
+    {
+      "name": "customers.create",
+      "description": "Create a new customer Documentation: POST /customers",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "customerData",
+          "type": "CustomerCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CustomerCreateParams"
+          }
+        },
+        "required": [
+          "customerData"
+        ]
+      }
+    },
+    {
+      "name": "customers.delete",
+      "description": "Delete a customer Documentation: DELETE /customers/{id}",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "customerId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      }
+    },
+    {
+      "name": "customers.getByContactNumber",
+      "description": "Get customer by contact number",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "getByContactNumber"
+      },
+      "params": [
+        {
+          "name": "contactNumber",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactNumber"
+        ]
+      }
+    },
+    {
+      "name": "customers.getByGroup",
+      "description": "Get customers by group ID",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "getByGroup"
+      },
+      "params": [
+        {
+          "name": "groupId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "number"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "groupId"
+        ]
+      }
+    },
+    {
+      "name": "customers.getById",
+      "description": "Get a customer by their ID Documentation: GET /customers/{id}",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "customerId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "customerId"
+        ]
+      }
+    },
+    {
+      "name": "customers.list",
+      "description": "List customers with optional filtering Documentation: GET /customers",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "customers.search",
+      "description": "Search customers by keyword",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "search"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "customers.update",
+      "description": "Update an existing customer Documentation: PUT /customers/{id}",
+      "dispatch": {
+        "namespace": "customers",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "customerId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "customerData",
+          "type": "Partial<CustomerUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "number"
+          },
+          "customerData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CustomerUpdateParams"
+          }
+        },
+        "required": [
+          "customerId",
+          "customerData"
+        ]
+      }
+    },
+    {
+      "name": "invoices.cancel",
+      "description": "Cancel an invoice",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "cancel"
+      },
+      "params": [
+        {
+          "name": "invoiceId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "invoiceId"
+        ]
+      }
+    },
+    {
+      "name": "invoices.create",
+      "description": "Create a new invoice",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "invoiceData",
+          "type": "InvoiceCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "InvoiceCreateParams"
+          }
+        },
+        "required": [
+          "invoiceData"
+        ]
+      }
+    },
+    {
+      "name": "invoices.delete",
+      "description": "Delete/void an invoice",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "invoiceId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "isVoidPayment",
+          "type": "boolean",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "number"
+          },
+          "isVoidPayment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "invoiceId"
+        ]
+      }
+    },
+    {
+      "name": "invoices.getByCode",
+      "description": "Get an invoice by its code",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "invoices.getByCustomer",
+      "description": "Get invoices by customer",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "getByCustomer"
+      },
+      "params": [
+        {
+          "name": "customerIdentifier",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<InvoiceListParams, 'customerPhone' | 'customerCode'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerIdentifier": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<InvoiceListParams, 'customerPhone' | 'customerCode'>"
+          }
+        },
+        "required": [
+          "customerIdentifier"
+        ]
+      }
+    },
+    {
+      "name": "invoices.getByDateRange",
+      "description": "Get invoices by date range",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "getByDateRange"
+      },
+      "params": [
+        {
+          "name": "fromDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "toDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<InvoiceListParams, 'fromPurchaseDate' | 'toPurchaseDate'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<InvoiceListParams, 'fromPurchaseDate' | 'toPurchaseDate'>"
+          }
+        },
+        "required": [
+          "fromDate",
+          "toDate"
+        ]
+      }
+    },
+    {
+      "name": "invoices.getById",
+      "description": "Get an invoice by its ID",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "invoiceId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "invoiceId"
+        ]
+      }
+    },
+    {
+      "name": "invoices.getByOrder",
+      "description": "Get invoices by order",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "getByOrder"
+      },
+      "params": [
+        {
+          "name": "orderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<InvoiceListParams, 'orderId'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<InvoiceListParams, 'orderId'>"
+          }
+        },
+        "required": [
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "invoices.list",
+      "description": "List invoices with optional filtering",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "InvoiceListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "InvoiceListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "invoices.update",
+      "description": "Update an existing invoice",
+      "dispatch": {
+        "namespace": "invoices",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "invoiceId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "invoiceData",
+          "type": "Partial<InvoiceUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceId": {
+            "type": "number"
+          },
+          "invoiceData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "InvoiceUpdateParams"
+          }
+        },
+        "required": [
+          "invoiceId",
+          "invoiceData"
+        ]
+      }
+    },
+    {
+      "name": "orders.cancel",
+      "description": "Cancel an order",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "cancel"
+      },
+      "params": [
+        {
+          "name": "orderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "orders.create",
+      "description": "Create a new order",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "orderData",
+          "type": "OrderCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "OrderCreateParams"
+          }
+        },
+        "required": [
+          "orderData"
+        ]
+      }
+    },
+    {
+      "name": "orders.delete",
+      "description": "Delete an order",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "orderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "isVoidPayment",
+          "type": "boolean",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "isVoidPayment": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "orders.getByCode",
+      "description": "Get an order by its code",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "orders.getByCustomer",
+      "description": "Get orders by customer",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "getByCustomer"
+      },
+      "params": [
+        {
+          "name": "customerIdentifier",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<OrderListParams, 'customerPhone' | 'customerCode'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "customerIdentifier": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<OrderListParams, 'customerPhone' | 'customerCode'>"
+          }
+        },
+        "required": [
+          "customerIdentifier"
+        ]
+      }
+    },
+    {
+      "name": "orders.getByDateRange",
+      "description": "Get orders by date range",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "getByDateRange"
+      },
+      "params": [
+        {
+          "name": "fromDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "toDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<OrderListParams, 'fromPurchaseDate' | 'toPurchaseDate'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<OrderListParams, 'fromPurchaseDate' | 'toPurchaseDate'>"
+          }
+        },
+        "required": [
+          "fromDate",
+          "toDate"
+        ]
+      }
+    },
+    {
+      "name": "orders.getById",
+      "description": "Get an order by its ID",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "orderId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId"
+        ]
+      }
+    },
+    {
+      "name": "orders.list",
+      "description": "List orders with optional filtering",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "OrderListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "OrderListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "orders.update",
+      "description": "Update an existing order",
+      "dispatch": {
+        "namespace": "orders",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "orderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "orderData",
+          "type": "Partial<OrderUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number"
+          },
+          "orderData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "OrderUpdateParams"
+          }
+        },
+        "required": [
+          "orderId",
+          "orderData"
+        ]
+      }
+    },
+    {
+      "name": "orderSuppliers.getById",
+      "description": "Get order supplier by ID",
+      "dispatch": {
+        "namespace": "orderSuppliers",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "orderSuppliers.list",
+      "description": "Get list of order suppliers with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "orderSuppliers",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "OrderSupplierListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "OrderSupplierListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "priceBooks.getById",
+      "description": "Get price book details by ID",
+      "dispatch": {
+        "namespace": "priceBooks",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "priceBookId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "priceBookId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "priceBookId"
+        ]
+      }
+    },
+    {
+      "name": "priceBooks.list",
+      "description": "List price books with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "priceBooks",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "PriceBookListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PriceBookListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "priceBooks.updatePriceDetail",
+      "description": "Update price details for a product in a price book",
+      "dispatch": {
+        "namespace": "priceBooks",
+        "method": "updatePriceDetail"
+      },
+      "params": [
+        {
+          "name": "data",
+          "type": "PriceBookDetailUpdateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PriceBookDetailUpdateParams"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "products.bulkCreate",
+      "description": "Add multiple products at once",
+      "dispatch": {
+        "namespace": "products",
+        "method": "bulkCreate"
+      },
+      "params": [
+        {
+          "name": "products",
+          "type": "ProductCreateParams[]",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "products"
+        ]
+      }
+    },
+    {
+      "name": "products.bulkUpdate",
+      "description": "Update multiple products at once",
+      "dispatch": {
+        "namespace": "products",
+        "method": "bulkUpdate"
+      },
+      "params": [
+        {
+          "name": "products",
+          "type": "ProductUpdateParams[]",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "products"
+        ]
+      }
+    },
+    {
+      "name": "products.create",
+      "description": "Create a new product",
+      "dispatch": {
+        "namespace": "products",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "productData",
+          "type": "ProductCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "ProductCreateParams"
+          }
+        },
+        "required": [
+          "productData"
+        ]
+      }
+    },
+    {
+      "name": "products.delete",
+      "description": "Delete a product",
+      "dispatch": {
+        "namespace": "products",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "productId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "productId"
+        ]
+      }
+    },
+    {
+      "name": "products.getAttributes",
+      "description": "Get all product attributes with their distinct values",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getAttributes"
+      },
+      "params": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "products.getByBarcode",
+      "description": "products.getByBarcode",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getByBarcode"
+      },
+      "params": [
+        {
+          "name": "barcode",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "barcode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "barcode"
+        ]
+      }
+    },
+    {
+      "name": "products.getByCategory",
+      "description": "Get products by category ID",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getByCategory"
+      },
+      "params": [
+        {
+          "name": "categoryId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "number"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "categoryId"
+        ]
+      }
+    },
+    {
+      "name": "products.getByCode",
+      "description": "Get a product by its code",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "products.getById",
+      "description": "Get a product by its ID",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "productId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "productId"
+        ]
+      }
+    },
+    {
+      "name": "products.getInventoryLevels",
+      "description": "Get product inventory levels across branches",
+      "dispatch": {
+        "namespace": "products",
+        "method": "getInventoryLevels"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "products.list",
+      "description": "List products with optional filtering",
+      "dispatch": {
+        "namespace": "products",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "products.search",
+      "description": "Search products by name or code",
+      "dispatch": {
+        "namespace": "products",
+        "method": "search"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Record<string, any>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "products.update",
+      "description": "Update an existing product",
+      "dispatch": {
+        "namespace": "products",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "productId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "productData",
+          "type": "Partial<ProductUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number"
+          },
+          "productData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "ProductUpdateParams"
+          }
+        },
+        "required": [
+          "productId",
+          "productData"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.cancel",
+      "description": "Cancel a purchase order",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "cancel"
+      },
+      "params": [
+        {
+          "name": "purchaseOrderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "purchaseOrderId": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "purchaseOrderId"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.create",
+      "description": "Create a new purchase order",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "purchaseOrderData",
+          "type": "PurchaseOrderCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "purchaseOrderData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PurchaseOrderCreateParams"
+          }
+        },
+        "required": [
+          "purchaseOrderData"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.getByDateRange",
+      "description": "Get purchase orders by date range",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "getByDateRange"
+      },
+      "params": [
+        {
+          "name": "fromDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "toDate",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<PurchaseOrderListParams, 'fromPurchaseDate' | 'toPurchaseDate'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<PurchaseOrderListParams, 'fromPurchaseDate' | 'toPurchaseDate'>"
+          }
+        },
+        "required": [
+          "fromDate",
+          "toDate"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.getById",
+      "description": "Get a purchase order by its ID",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "purchaseOrderId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "purchaseOrderId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "purchaseOrderId"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.getBySupplier",
+      "description": "Get purchase orders by supplier code",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "getBySupplier"
+      },
+      "params": [
+        {
+          "name": "supplierCode",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<PurchaseOrderListParams, 'supplierCode'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "supplierCode": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<PurchaseOrderListParams, 'supplierCode'>"
+          }
+        },
+        "required": [
+          "supplierCode"
+        ]
+      }
+    },
+    {
+      "name": "purchaseOrders.list",
+      "description": "List purchase orders with optional filtering",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "PurchaseOrderListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PurchaseOrderListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "purchaseOrders.update",
+      "description": "Update an existing purchase order",
+      "dispatch": {
+        "namespace": "purchaseOrders",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "purchaseOrderId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "purchaseOrderData",
+          "type": "Partial<PurchaseOrderUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "purchaseOrderId": {
+            "type": "number"
+          },
+          "purchaseOrderData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "PurchaseOrderUpdateParams"
+          }
+        },
+        "required": [
+          "purchaseOrderId",
+          "purchaseOrderData"
+        ]
+      }
+    },
+    {
+      "name": "returns.getByCode",
+      "description": "Get return by code",
+      "dispatch": {
+        "namespace": "returns",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "returns.getById",
+      "description": "Get return by ID",
+      "dispatch": {
+        "namespace": "returns",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "returns.list",
+      "description": "Get list of returns with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "returns",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "ReturnListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "ReturnListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "salesChannels.list",
+      "description": "Get list of sales channels",
+      "dispatch": {
+        "namespace": "salesChannels",
+        "method": "list"
+      },
+      "params": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "settings.get",
+      "description": "Get settings",
+      "dispatch": {
+        "namespace": "settings",
+        "method": "get"
+      },
+      "params": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "suppliers.getByCode",
+      "description": "Get supplier by code",
+      "dispatch": {
+        "namespace": "suppliers",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "suppliers.getById",
+      "description": "Get supplier by ID",
+      "dispatch": {
+        "namespace": "suppliers",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "suppliers.list",
+      "description": "Get list of suppliers with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "suppliers",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "SupplierListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "SupplierListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "surcharges.create",
+      "description": "Create a new surcharge",
+      "dispatch": {
+        "namespace": "surcharges",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "surchargeData",
+          "type": "SurchargeCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surchargeData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "SurchargeCreateParams"
+          }
+        },
+        "required": [
+          "surchargeData"
+        ]
+      }
+    },
+    {
+      "name": "surcharges.delete",
+      "description": "Delete a surcharge",
+      "dispatch": {
+        "namespace": "surcharges",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "surchargeId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surchargeId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "surchargeId"
+        ]
+      }
+    },
+    {
+      "name": "surcharges.getById",
+      "description": "Get a surcharge by its ID",
+      "dispatch": {
+        "namespace": "surcharges",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "surchargeId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surchargeId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "surchargeId"
+        ]
+      }
+    },
+    {
+      "name": "surcharges.list",
+      "description": "List surcharges with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "surcharges",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "SurchargeListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "SurchargeListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "surcharges.update",
+      "description": "Update an existing surcharge",
+      "dispatch": {
+        "namespace": "surcharges",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "surchargeId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "surchargeData",
+          "type": "Partial<SurchargeUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surchargeId": {
+            "type": "number"
+          },
+          "surchargeData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "SurchargeUpdateParams"
+          }
+        },
+        "required": [
+          "surchargeId",
+          "surchargeData"
+        ]
+      }
+    },
+    {
+      "name": "trademarks.list",
+      "description": "Get list of trademarks",
+      "dispatch": {
+        "namespace": "trademarks",
+        "method": "list"
+      },
+      "params": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "transfers.create",
+      "description": "Create a new transfer",
+      "dispatch": {
+        "namespace": "transfers",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "data",
+          "type": "CreateTransferParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CreateTransferParams"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "transfers.delete",
+      "description": "Delete transfer by ID",
+      "dispatch": {
+        "namespace": "transfers",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "transfers.getById",
+      "description": "Get transfer by ID",
+      "dispatch": {
+        "namespace": "transfers",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "transfers.list",
+      "description": "Get list of transfers with optional filtering and pagination",
+      "dispatch": {
+        "namespace": "transfers",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "TransferListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "TransferListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "transfers.update",
+      "description": "Update transfer by ID",
+      "dispatch": {
+        "namespace": "transfers",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "data",
+          "type": "CreateTransferParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "CreateTransferParams"
+          }
+        },
+        "required": [
+          "id",
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "users.getActive",
+      "description": "Get active users",
+      "dispatch": {
+        "namespace": "users",
+        "method": "getActive"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "Omit<UserListParams, 'isActive'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<UserListParams, 'isActive'>"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "users.getByBranch",
+      "description": "Get users by branch",
+      "dispatch": {
+        "namespace": "users",
+        "method": "getByBranch"
+      },
+      "params": [
+        {
+          "name": "branchId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<UserListParams, 'branchId'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "branchId": {
+            "type": "number"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<UserListParams, 'branchId'>"
+          }
+        },
+        "required": [
+          "branchId"
+        ]
+      }
+    },
+    {
+      "name": "users.getById",
+      "description": "Get a user by their ID",
+      "dispatch": {
+        "namespace": "users",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "userId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "userId"
+        ]
+      }
+    },
+    {
+      "name": "users.list",
+      "description": "List users with optional filtering",
+      "dispatch": {
+        "namespace": "users",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "UserListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "UserListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "users.search",
+      "description": "Search users by name or code",
+      "dispatch": {
+        "namespace": "users",
+        "method": "search"
+      },
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "params",
+          "type": "Omit<UserListParams, 'name' | 'code'>",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "Omit<UserListParams, 'name' | 'code'>"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.createCampaign",
+      "description": "vouchers.createCampaign",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "createCampaign"
+      },
+      "params": [
+        {
+          "name": "data",
+          "type": "VoucherCampaignCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "VoucherCampaignCreateParams"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.deleteCampaign",
+      "description": "vouchers.deleteCampaign",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "deleteCampaign"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.get",
+      "description": "vouchers.get",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "get"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.getByCode",
+      "description": "vouchers.getByCode",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "getByCode"
+      },
+      "params": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.getCampaign",
+      "description": "vouchers.getCampaign",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "getCampaign"
+      },
+      "params": [
+        {
+          "name": "id",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    {
+      "name": "vouchers.list",
+      "description": "vouchers.list",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "VoucherListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "VoucherListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "vouchers.listCampaigns",
+      "description": "vouchers.listCampaigns",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "listCampaigns"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "VoucherCampaignListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "VoucherCampaignListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "vouchers.updateCampaign",
+      "description": "vouchers.updateCampaign",
+      "dispatch": {
+        "namespace": "vouchers",
+        "method": "updateCampaign"
+      },
+      "params": [
+        {
+          "name": "data",
+          "type": "VoucherCampaignUpdateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "VoucherCampaignUpdateParams"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.create",
+      "description": "Create a new webhook",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "create"
+      },
+      "params": [
+        {
+          "name": "webhookData",
+          "type": "WebhookCreateParams",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "WebhookCreateParams"
+          }
+        },
+        "required": [
+          "webhookData"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.delete",
+      "description": "Delete a webhook",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "delete"
+      },
+      "params": [
+        {
+          "name": "webhookId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "webhookId"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.disable",
+      "description": "Disable a webhook",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "disable"
+      },
+      "params": [
+        {
+          "name": "webhookId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "webhookId"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.enable",
+      "description": "Enable a webhook",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "enable"
+      },
+      "params": [
+        {
+          "name": "webhookId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "webhookId"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.getById",
+      "description": "Get a webhook by its ID",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "getById"
+      },
+      "params": [
+        {
+          "name": "webhookId",
+          "type": "number",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "webhookId"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.list",
+      "description": "List webhooks with optional filtering",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "list"
+      },
+      "params": [
+        {
+          "name": "params",
+          "type": "WebhookListParams",
+          "optional": true
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "WebhookListParams"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "webhooks.parseCustomerUpdateWebhook",
+      "description": "Parse and verify customer update webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseCustomerUpdateWebhook"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseInvoiceUpdateWebhook",
+      "description": "Parse and verify invoice update webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseInvoiceUpdateWebhook"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseOrderUpdateWebhook",
+      "description": "Parse and verify order update webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseOrderUpdateWebhook"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseProductUpdateWebhook",
+      "description": "Parse and verify product update webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseProductUpdateWebhook"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseStockUpdateWebhook",
+      "description": "Parse and verify stock update webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseStockUpdateWebhook"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseTypedWebhookPayload",
+      "description": "Parse and verify a webhook payload with automatic type casting based on the event type",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseTypedWebhookPayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "expectedEvent",
+          "type": "E",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "expectedEvent": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "E"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret",
+          "expectedEvent"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.parseWebhookPayload",
+      "description": "Parse and verify webhook payload",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "parseWebhookPayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.update",
+      "description": "Update an existing webhook",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "update"
+      },
+      "params": [
+        {
+          "name": "webhookId",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "name": "webhookData",
+          "type": "Partial<WebhookUpdateParams>",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "type": "number"
+          },
+          "webhookData": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "WebhookUpdateParams"
+          }
+        },
+        "required": [
+          "webhookId",
+          "webhookData"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.validateCustomerUpdatePayload",
+      "description": "Kiểm tra xem webhook payload có hợp lệ không và có đúng cấu trúc cho customer.update không",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "validateCustomerUpdatePayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "any"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.validateDeletePayload",
+      "description": "Kiểm tra cấu trúc của payload xóa (RemoveId)",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "validateDeletePayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "any"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.validateGenericUpdatePayload",
+      "description": "Kiểm tra cấu trúc chung của webhook payload (trường hợp update)",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "validateGenericUpdatePayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "any"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.validateOrderUpdatePayload",
+      "description": "Kiểm tra xem webhook payload có hợp lệ không và có đúng cấu trúc cho order.update không",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "validateOrderUpdatePayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "any"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.validateProductUpdatePayload",
+      "description": "Kiểm tra xem webhook payload có hợp lệ không và có đúng cấu trúc cho product.update không",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "validateProductUpdatePayload"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "any",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "x-kv-rawType": "any"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      }
+    },
+    {
+      "name": "webhooks.verifySignature",
+      "description": "Verify webhook signature",
+      "dispatch": {
+        "namespace": "webhooks",
+        "method": "verifySignature"
+      },
+      "params": [
+        {
+          "name": "payload",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "signature",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "secret",
+          "type": "string",
+          "optional": false
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "signature",
+          "secret"
+        ]
+      }
+    }
+  ]
+}
