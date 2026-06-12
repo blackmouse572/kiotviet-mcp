@@ -4,6 +4,7 @@ import { parseEnv } from "../src/env";
 import { InProcessLock, MemoryStore } from "../src/store/memory";
 import { generateKeyPairHex } from "../src/auth/envelope";
 import { sign, HMAC_SIGNATURE_HEADER, HMAC_TIMESTAMP_HEADER } from "../src/auth/hmac";
+import { CATALOG_PROFILE_HEADER } from "../src/tool-metadata";
 
 const HMAC_SECRET = "shared-secret-for-tests-do-not-use-x";
 
@@ -158,10 +159,12 @@ describe("e2e", () => {
       }),
     );
     expect(listRes.status).toBe(200);
-    const listJson = (await listRes.json()) as { result: { tools: { name: string }[] } };
+    const listJson = (await listRes.json()) as { result: { tools: { name: string; description: string }[] } };
     const names = listJson.result.tools.map((t) => t.name);
     expect(names).toContain("products.list");
+    expect(names).not.toContain("bankAccounts.getById");
     expect(names).not.toContain("webhooks.create");
+    expect(listJson.result.tools.find((t) => t.name === "products.list")?.description).toContain("Purpose:");
 
     const callBody = JSON.stringify({
       jsonrpc: "2.0",
@@ -252,7 +255,108 @@ describe("e2e", () => {
     );
     expect(ok.status).toBe(200);
     const json = (await ok.json()) as { tools: { name: string }[] };
-    expect(json.tools.length).toBeGreaterThan(50);
+    expect(json.tools.map((tool) => tool.name)).toContain("products.list");
+    expect(json.tools.map((tool) => tool.name)).not.toContain("bankAccounts.getById");
+  });
+
+  test("/tools and /mcp can opt into the full profile", async () => {
+    const env = makeEnv();
+    mock = installFetchMock();
+    const app = buildApp({ env, runtime: "memory", store: new MemoryStore(), lock: new InProcessLock(), clientFactory: fakeClientFactory });
+
+    const body = JSON.stringify({ retailer: "x", clientId: "x", clientSecret: "x", iss: "managed" });
+    const { ts, sig } = await signedFetch(env, "POST", "/internal/link", body);
+    const linkRes = await app.fetch(
+      new Request("http://x/internal/link", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          [HMAC_TIMESTAMP_HEADER]: ts,
+          [HMAC_SIGNATURE_HEADER]: sig,
+        },
+        body,
+      }),
+    );
+    const linkJson = (await linkRes.json()) as { bearer: string };
+
+    const fullHeaders = await signedFetch(env, "GET", "/tools", "");
+    const fullToolsRes = await app.fetch(
+      new Request("http://x/tools", {
+        headers: {
+          [HMAC_TIMESTAMP_HEADER]: fullHeaders.ts,
+          [HMAC_SIGNATURE_HEADER]: fullHeaders.sig,
+          [CATALOG_PROFILE_HEADER]: "full",
+        },
+      }),
+    );
+    expect(fullToolsRes.status).toBe(200);
+    const fullToolsJson = (await fullToolsRes.json()) as { tools: { name: string }[] };
+    expect(fullToolsJson.tools.map((tool) => tool.name)).toContain("bankAccounts.getById");
+
+    const listBody = JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/list" });
+    const fullListRes = await app.fetch(
+      new Request("http://x/mcp", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json, text/event-stream",
+          authorization: "Bearer " + linkJson.bearer,
+          [CATALOG_PROFILE_HEADER]: "full",
+        },
+        body: listBody,
+      }),
+    );
+    expect(fullListRes.status).toBe(200);
+    const fullListJson = (await fullListRes.json()) as { result: { tools: { name: string }[] } };
+    expect(fullListJson.result.tools.map((tool) => tool.name)).toContain("bankAccounts.getById");
+  });
+
+  test("/mcp rejects tools outside the curated profile", async () => {
+    const env = makeEnv();
+    mock = installFetchMock();
+    const app = buildApp({ env, runtime: "memory", store: new MemoryStore(), lock: new InProcessLock(), clientFactory: fakeClientFactory });
+
+    const linkBody = JSON.stringify({
+      retailer: "abcstore",
+      clientId: "client-id-1",
+      clientSecret: "client-secret-1",
+      iss: "managed",
+    });
+    const { ts, sig } = await signedFetch(env, "POST", "/internal/link", linkBody);
+    const linkRes = await app.fetch(
+      new Request("http://x/internal/link", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          [HMAC_TIMESTAMP_HEADER]: ts,
+          [HMAC_SIGNATURE_HEADER]: sig,
+        },
+        body: linkBody,
+      }),
+    );
+    const linkJson = (await linkRes.json()) as { bearer: string };
+
+    const callBody = JSON.stringify({
+      jsonrpc: "2.0",
+      id: 9,
+      method: "tools/call",
+      params: { name: "bankAccounts.getById", arguments: { accountId: 1 } },
+    });
+    const callRes = await app.fetch(
+      new Request("http://x/mcp", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json, text/event-stream",
+          authorization: "Bearer " + linkJson.bearer,
+        },
+        body: callBody,
+      }),
+    );
+    expect(callRes.status).toBe(200);
+    const callJson = (await callRes.json()) as { result: { isError?: boolean; content: { text: string }[] } };
+    expect(callJson.result.isError).toBe(true);
+    expect(callJson.result.content[0]?.text).toContain("unknown tool: bankAccounts.getById");
   });
 
   test("GET /authorize renders consent page", async () => {

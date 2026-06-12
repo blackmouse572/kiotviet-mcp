@@ -85,17 +85,17 @@ Locally no — `http://localhost:8787` is fine for the managed-link flow. For BY
 
 ## Tools & catalog
 
-### Where do the 116 tools come from?
+### Where do the tools come from?
 
-`scripts/generate-tools.ts` walks `KiotVietClient` in `kiotviet-client-sdk` via ts-morph and emits one tool per public handler method into `src/generated/tools.json`. `src/generated/overrides.ts` patches descriptions, refines schemas, and hides sensitive endpoints (`webhooks.create/update/delete`). Final count comes from the merge in `src/catalog.ts`.
+`scripts/generate-tools.ts` walks `KiotVietClient` in `kiotviet-client-sdk` via ts-morph and emits one tool per public handler method into `src/generated/tools.json` (**119 generated tools** right now). `src/generated/overrides.ts` patches schemas and hides sensitive endpoints (`webhooks.create/update/delete`). `src/tool-metadata.ts` adds LLM-friendly descriptions and decides which tools land in the default curated profile. Final count comes from the merge in `src/catalog.ts`: **21 curated tools by default**, **116 tools in the full profile**.
 
 ### How do I add a new tool?
 
-You don't — bump the SDK version, run `bun run gen:tools`, and the new tool appears in the catalog automatically. If the auto-generated schema is too loose, patch it in `src/generated/overrides.ts`. Full workflow in `docs/generator.md`.
+You don't add it directly to `tools.json` — bump the SDK version, run `bun run gen:tools`, and the raw tool appears automatically. If the schema is too loose, patch it in `src/generated/overrides.ts`. If you want the tool in the default LLM-friendly profile, also add a guide in `src/tool-metadata.ts`. Full workflow in `docs/generator.md`.
 
 ### Why doesn't my override change `tools.json`?
 
-By design. `tools.json` is the generator's deterministic output; `overrides.ts` is a runtime patch layer applied in `src/catalog.ts`. This keeps `git diff src/generated/tools.json` clean for SDK drift in CI, and lets you regenerate without losing hand edits.
+By design. `tools.json` is the generator's deterministic output; `overrides.ts` and `tool-metadata.ts` are runtime patch layers applied in `src/catalog.ts`. This keeps `git diff src/generated/tools.json` clean for SDK drift in CI, and lets you regenerate without losing hand edits.
 
 ### How do I hide a tool from BYO callers?
 
@@ -106,6 +106,16 @@ Add an entry in `src/generated/overrides.ts`:
 ```
 
 `loadCatalog()` drops it from both `tools/list` and dispatch.
+
+### Why is a tool missing from the default MCP list?
+
+The default profile is `curated`, not `full`. Only tools with validated LLM-friendly metadata are exposed there. To inspect every non-hidden tool, send:
+
+```http
+x-kiotviet-tool-profile: full
+```
+
+to `/mcp` or `/tools`.
 
 ## Operations
 

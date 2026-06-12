@@ -3,9 +3,11 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { loadCatalog } from "../catalog";
 import { dispatch, type DispatchContext } from "./dispatch";
+import type { CatalogProfile } from "../tool-metadata";
 
 export interface BuildServerDeps {
   ctx: DispatchContext;
+  profile: CatalogProfile;
 }
 
 export function buildMcpServer(deps: BuildServerDeps): Server {
@@ -13,7 +15,7 @@ export function buildMcpServer(deps: BuildServerDeps): Server {
     { name: "kiotviet-mcp", version: "0.1.0" },
     { capabilities: { tools: {} } },
   );
-  const catalog = loadCatalog();
+  const catalog = loadCatalog(deps.profile);
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
     tools: catalog.map((t) => ({
@@ -47,7 +49,7 @@ export function buildMcpServer(deps: BuildServerDeps): Server {
 }
 
 export async function handleMcpRequest(request: Request, ctx: DispatchContext): Promise<Response> {
-  const server = buildMcpServer({ ctx });
+  const server = buildMcpServer({ ctx, profile: ctx.profile });
   const transport = new WebStandardStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,

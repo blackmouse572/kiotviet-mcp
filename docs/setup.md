@@ -135,7 +135,6 @@ On first connect, the client follows the OAuth pointer to `/authorize`, presents
 
 ```bash
 bun test
-# 21 pass / 0 fail
 ```
 
 `tests/e2e.test.ts` runs the full HTTP flow against an injected fake SDK; `tests/token-cache.test.ts` covers single-flight; `tests/envelope.test.ts` + `tests/hmac.test.ts` cover the crypto primitives. No network access required.

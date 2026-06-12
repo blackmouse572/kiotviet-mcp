@@ -1,6 +1,9 @@
 # Tool catalog generator
 
-The worker exposes every public method on `kiotviet-client-sdk`'s `KiotVietClient` as an MCP tool. The catalog is generated at build time (`scripts/generate-tools.ts`) and merged with hand-curated overrides at boot (`src/catalog.ts`).
+The worker exposes every public method on `kiotviet-client-sdk`'s `KiotVietClient` as an MCP tool. The raw catalog is generated at build time (`scripts/generate-tools.ts`) and then enriched at boot by:
+
+- `src/generated/overrides.ts` — schema tightening + hard hides.
+- `src/tool-metadata.ts` — LLM-friendly descriptions + profile membership (`curated` vs `full`).
 
 ## Run it
 
@@ -8,7 +11,7 @@ The worker exposes every public method on `kiotviet-client-sdk`'s `KiotVietClien
 bun run gen:tools
 ```
 
-Produces `src/generated/tools.json` with one entry per `KiotVietClient.<namespace>.<method>`. Current output: **119 tools across 21 namespaces**.
+Produces `src/generated/tools.json` with one entry per `KiotVietClient.<namespace>.<method>`. Current output: **119 generated tools across 21 namespaces**.
 
 Re-run whenever:
 - `kiotviet-client-sdk` is bumped (`bun add kiotviet-client-sdk@<new>` then `bun run gen:tools`).
@@ -18,6 +21,12 @@ Wire it into CI to fail on drift:
 
 ```bash
 bun run gen:tools && git diff --exit-code src/generated/tools.json
+```
+
+Validate curated metadata and stale overrides:
+
+```bash
+bun run check:catalog
 ```
 
 ## How it works (`scripts/generate-tools.ts`)
@@ -42,7 +51,7 @@ return method.apply(handler, positional);
 
 So a tool like `products.search(query, params?)` is called as `products.search(args.query, args.params)`.
 
-## Overrides (`src/generated/overrides.ts`)
+## Schema overrides (`src/generated/overrides.ts`)
 
 The generator is intentionally conservative — it never invents a schema it can't justify from the SDK's `.d.ts`. Overrides are the patch layer:
 
@@ -74,17 +83,46 @@ export const OVERRIDES: Record<string, ToolOverride> = {
 ```
 
 Three things an override can do:
-- `description?` — replace the JSDoc-derived description (keep it terse and agent-readable).
+- `description?` — replace the raw generated description before fallback rendering.
 - `inputSchema?` — replace the whole schema. Agents lean on this heavily; tighten it when the generator emitted `additionalProperties: true`.
 - `hidden?: true` — drop the tool from `tools/list` (used for `webhooks.*` mutators in v1).
 
 `src/catalog.ts` merges them at module load. There's no override mechanism for *renaming* a tool — match the generator's output exactly.
 
+## LLM metadata (`src/tool-metadata.ts`)
+
+This is the layer agents actually read first. Each curated tool gets a structured guide with:
+
+- `purpose`
+- `useWhen`
+- `avoidWhen`
+- `requiredInputs`
+- `optionalInputs`
+- `returns`
+- `safety`
+- `pitfalls`
+
+At runtime the guide is rendered into a consistent description string so MCP clients get task-oriented text instead of SDK-style API text.
+
+Profile behavior:
+
+- `curated` — default. Only tools with validated LLM metadata are exposed.
+- `full` — all non-hidden tools are exposed. Tools without curated metadata fall back to `Advanced tool. API-derived description: ...`.
+
+Request the full profile with:
+
+```http
+x-kiotviet-tool-profile: full
+```
+
+on both `/mcp` and `/tools`.
+
 ## Adding an override
 
 1. Run `bun run gen:tools`, find the tool in `src/generated/tools.json` and verify its name.
-2. Add the override entry in `src/generated/overrides.ts`.
-3. `bun test` — the e2e test asserts a few key tools are present and hidden ones are excluded.
+2. If needed, add schema/hide rules in `src/generated/overrides.ts`.
+3. Add an LLM-ready guide in `src/tool-metadata.ts` if the tool should be in the curated profile.
+4. `bun test` — this now also runs `bun run check:catalog`.
 
 ## Workflow for a new SDK version
 
@@ -95,4 +133,4 @@ bun test
 git diff src/generated/tools.json   # eyeball additions / removals
 ```
 
-If the SDK renamed a tool, the existing override entry becomes a no-op. The override file is plain TS so `bun run gen:tools` doesn't touch it — manual cleanup only.
+If the SDK renamed a tool, the existing override or metadata entry becomes stale. `bun run check:catalog` fails on stale keys so you can clean them up before shipping.

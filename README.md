@@ -17,10 +17,10 @@ Both flows produce an **opaque sealed-envelope bearer** — the bearer is itself
 
 - 🔐 **Stateless credential storage** — bearer = NaCl sealed-box envelope; rotate the keypair to revoke every outstanding bearer.
 - 🌐 **Runtime-portable** — Bun (in-memory) or Cloudflare Workers (KV + Durable Objects), no code differences.
-- 🛠️ **Auto-generated tool catalog** — `ts-morph` introspects `KiotVietClient` and emits **116 production tools across 21 namespaces** (products, customers, orders, invoices, ...). Hand-curated overrides patch high-value schemas and hide sensitive endpoints.
+- 🛠️ **Profiled tool catalog** — `ts-morph` introspects `KiotVietClient` and emits **119 generated tools across 21 namespaces**. The runtime exposes a **21-tool curated default profile** with LLM-friendly descriptions, while the **full profile** keeps all **116 non-hidden tools** for advanced callers.
 - ⚡ **Single-flight token refresh** — in-process Promise map locally; Durable Object per-key serialisation in Workers. Concurrent tool calls during expiry trigger exactly one `client_credentials` exchange.
 - 🪝 **HMAC-signed admin surface** — `/internal/link` and `/tools` are gated by a shared secret with your backend; `/mcp` is gated by the sealed bearer.
-- 🧪 **Test-first** — 21 unit + e2e tests covering envelope crypto, HMAC, token cache concurrency, and the full `link → tools/list → tools/call` flow against an injected fake SDK.
+- 🧪 **Test-first** — unit + e2e coverage for envelope crypto, HMAC, token cache concurrency, catalog profiles, and the full `link → tools/list → tools/call` flow against an injected fake SDK.
 
 ## Getting started
 
@@ -48,6 +48,7 @@ Then fill in:
 |---|---|
 | `MCP_BEARER_PK` / `MCP_BEARER_SK` | Envelope keypair (32-byte hex each) |
 | `LINK_HMAC_SECRET` | Shared secret used by your backend to sign `/internal/link` and `/tools` requests |
+| `DEFAULT_TOOL_PROFILE` *(optional)* | `curated` (default) for the smaller LLM-friendly catalog, or `full` for every non-hidden tool |
 | `TOKEN_CACHE_KEY` *(optional)* | Wraps KV-cached tokens with AES-256-GCM |
 
 Generate a keypair:
@@ -65,7 +66,7 @@ bun run dev
 
 ```bash
 curl http://localhost:8787/healthz
-# {"ok":true,"runtime":"memory","tools":116}
+# {"ok":true,"runtime":"memory","tools":21}
 ```
 
 ### Deploy to Cloudflare Workers
@@ -87,6 +88,8 @@ Full step-by-step (including `wrangler dev` with miniflare, key rotation, troubl
 ### From an MCP client (BYO)
 
 Point the client at `https://<worker>/mcp`. On first call the client follows the OAuth pointer to the consent page, where the user pastes their KiotViet `retailer`, `clientId`, and `clientSecret`. The worker validates against KiotViet's IDP, mints a sealed bearer, and the client stores it like any other OAuth token.
+
+By default the server exposes the curated LLM-friendly tool profile. Advanced callers can request the full profile by sending `x-kiotviet-tool-profile: full` on both `/mcp` and `/tools`.
 
 ```json
 {
@@ -126,7 +129,6 @@ Then any tool call goes through `/mcp` with `Authorization: Bearer <bearer>`. Th
 
 ```bash
 bun test
-# 21 pass / 0 fail
 ```
 
 The e2e suite runs the full HTTP path against an injected fake SDK — no network required.
