@@ -42,9 +42,7 @@ const curatedToolNames = Object.entries(TOOL_METADATA)
 if (curatedToolNames.length === 0) errors.push("expected at least one curated tool");
 
 if (errors.length) {
-  console.error("Catalog validation failed:");
-  for (const error of errors) console.error(`- ${error}`);
-  process.exit(1);
+  throw new Error(`Catalog validation failed:\n${errors.map((error) => `- ${error}`).join("\n")}`);
 }
 
 console.log(

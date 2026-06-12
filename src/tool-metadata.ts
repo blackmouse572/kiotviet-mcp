@@ -315,7 +315,7 @@ export function renderGuideDescription(name: string, generatedDescription: strin
   ].join(" ");
 }
 
-export function parseCatalogProfile(value: string | undefined, fallback: CatalogProfile = DEFAULT_CATALOG_PROFILE): CatalogProfile | undefined {
+export function parseCatalogProfile(value: string | undefined, fallback: CatalogProfile = DEFAULT_CATALOG_PROFILE): CatalogProfile | null {
   if (!value) return fallback;
-  return VALID_PROFILES.has(value as CatalogProfile) ? (value as CatalogProfile) : undefined;
+  return VALID_PROFILES.has(value as CatalogProfile) ? (value as CatalogProfile) : null;
 }
