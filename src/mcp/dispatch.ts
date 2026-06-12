@@ -1,9 +1,11 @@
 import type { KiotVietClient } from "kiotviet-client-sdk";
 import { findTool } from "../catalog";
+import type { CatalogProfile } from "../tool-metadata";
 
 export interface DispatchContext {
   client: KiotVietClient;
   retailer: string;
+  profile: CatalogProfile;
 }
 
 /**
@@ -12,7 +14,7 @@ export interface DispatchContext {
  * resolve to `undefined`.
  */
 export async function dispatch(toolName: string, args: Record<string, unknown> | undefined, ctx: DispatchContext): Promise<unknown> {
-  const tool = findTool(toolName);
+  const tool = findTool(toolName, ctx.profile);
   if (!tool) throw new ToolNotFoundError(toolName);
 
   const handler = (ctx.client as unknown as Record<string, Record<string, (...a: unknown[]) => unknown>>)[tool.dispatch.namespace];

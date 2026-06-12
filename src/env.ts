@@ -4,6 +4,7 @@ export const EnvSchema = z.object({
   MCP_BEARER_PK: z.string().regex(/^[0-9a-f]{64}$/i, "must be 32-byte hex"),
   MCP_BEARER_SK: z.string().regex(/^[0-9a-f]{64}$/i, "must be 32-byte hex"),
   LINK_HMAC_SECRET: z.string().min(16),
+  DEFAULT_TOOL_PROFILE: z.enum(["curated", "full"]).default("curated"),
   TOKEN_CACHE_KEY: z
     .string()
     .regex(/^[0-9a-f]{64}$/i)

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
-    "test": "bun test",
+    "test": "bun test && bun run check:catalog",
+    "check:catalog": "bun run scripts/validate-catalog.ts",
     "gen:tools": "bun run scripts/generate-tools.ts",
     "wrangler:dev": "wrangler dev",
     "wrangler:deploy": "wrangler deploy"

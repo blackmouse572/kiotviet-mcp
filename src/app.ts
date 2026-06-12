@@ -11,6 +11,7 @@ import { handleMcpRequest } from "./mcp/server";
 import { loadCatalog } from "./catalog";
 import type { SdkContext } from "./kiotviet/client";
 import type { CachedToken } from "./store/types";
+import { CATALOG_PROFILE_HEADER, parseCatalogProfile } from "./tool-metadata";
 
 export type ClientFactory = (
   creds: { retailer: string; clientId: string; clientSecret: string },
@@ -37,12 +38,13 @@ export function buildApp(deps: AppDeps) {
   const app = new Hono();
   const { env } = deps;
   const makeClient: ClientFactory = deps.clientFactory ?? ((creds, cachedToken) => clientFor(creds, cachedToken));
+  const resolveProfile = (raw: string | undefined) => parseCatalogProfile(raw, env.DEFAULT_TOOL_PROFILE);
 
   app.get("/healthz", (c) =>
     c.json({
       ok: true,
       runtime: deps.runtime,
-      tools: loadCatalog().length,
+      tools: loadCatalog(env.DEFAULT_TOOL_PROFILE).length,
     }),
   );
 
@@ -59,8 +61,10 @@ export function buildApp(deps: AppDeps) {
       "",
     );
     if (!ok) return c.json({ error: "invalid signature" }, 401);
+    const profile = resolveProfile(c.req.header(CATALOG_PROFILE_HEADER));
+    if (!profile) return c.json({ error: `invalid tool profile; use curated or full in ${CATALOG_PROFILE_HEADER}` }, 400);
     return c.json({
-      tools: loadCatalog().map((t) => ({
+      tools: loadCatalog(profile).map((t) => ({
         name: t.name,
         description: t.description,
         inputSchema: t.inputSchema,
@@ -171,6 +175,8 @@ export function buildApp(deps: AppDeps) {
 
   // POST /mcp — MCP Streamable HTTP entrypoint.
   app.all("/mcp", async (c) => {
+    const profile = resolveProfile(c.req.header(CATALOG_PROFILE_HEADER));
+    if (!profile) return c.json({ error: `invalid tool profile; use curated or full in ${CATALOG_PROFILE_HEADER}` }, 400);
     const auth = c.req.header("authorization") ?? "";
     const bearer = auth.startsWith("Bearer ") ? auth.slice("Bearer ".length).trim() : "";
     if (!bearer) return c.json({ error: "missing bearer" }, 401);
@@ -200,7 +206,7 @@ export function buildApp(deps: AppDeps) {
       { retailer: payload.retailer, clientId: payload.clientId, clientSecret: payload.clientSecret },
       cachedToken,
     );
-    return handleMcpRequest(c.req.raw, { client: sdkCtx.client, retailer: sdkCtx.retailer });
+    return handleMcpRequest(c.req.raw, { client: sdkCtx.client, retailer: sdkCtx.retailer, profile });
   });
 
   return app;
