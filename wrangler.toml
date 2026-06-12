@@ -2,21 +2,36 @@ name = "kiotviet-mcp"
 main = "src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
-
-# Optional KV namespace for the token cache. Omit to fall back to
+ # Optional KV namespace for the token cache. Omit to fall back to
 # in-memory storage (single-isolate cache, no cross-region sharing).
-# [[kv_namespaces]]
-# binding = "KIOTVIET_TOKENS"
-# id = "<fill in via `wrangler kv namespace create KIOTVIET_TOKENS`>"
+[[kv_namespaces]]
+binding = "KIOTVIET_TOKENS"
+id = "28331928dc414f3fa754d1f68f102dc1"
 
 # Optional Durable Object for cross-isolate single-flight refresh.
-# [[durable_objects.bindings]]
-# name = "TOKEN_REFRESH_AGENT"
-# class_name = "TokenRefreshAgent"
+[[durable_objects.bindings]]
+name = "TOKEN_REFRESH_AGENT"
+class_name = "TokenRefreshAgent"
 
-# [[migrations]]
-# tag = "v1"
-# new_classes = ["TokenRefreshAgent"]
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["TokenRefreshAgent"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
+
 
 [vars]
 KIOTVIET_TOKEN_URL = "https://id.kiotviet.vn/connect/token"
