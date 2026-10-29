@@ -22,10 +22,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "dotenv": "^8.2.0",
     "hono": "^4.12.25",
     "kiotviet-client-sdk": "^0.4.0",
-    "node-fetch": "^3.3.2",
     "tweetnacl": "^1.0.3",
     "zod": "^4.4.3"
   }
