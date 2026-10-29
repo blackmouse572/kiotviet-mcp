@@ -5,8 +5,6 @@ import { InProcessLock, MemoryStore } from "./store/memory";
 import { WorkersKVStore } from "./store/workers-kv";
 import { WorkersDOLock, TokenRefreshAgent } from "./store/do-lock";
 import type { Lock, TokenStore } from "./store/types";
-import 'dotenv/config';
-
 export { TokenRefreshAgent };
 
 function pickStorage(bindings: WorkersBindings | undefined, env: ReturnType<typeof parseEnv>): { store: TokenStore; lock: Lock } {
