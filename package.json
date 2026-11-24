@@ -3,8 +3,8 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "node init && bun run --hot src/index.ts",
-    "start": "node init && bun run src/index.ts",
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
     "test": "bun test && bun run check:catalog",
     "check:catalog": "bun run scripts/validate-catalog.ts",
     "gen:tools": "bun run scripts/generate-tools.ts",
@@ -22,10 +22,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "dotenv": "^8.2.0",
     "hono": "^4.12.25",
     "kiotviet-client-sdk": "^0.4.0",
-    "node-fetch": "^3.3.2",
     "tweetnacl": "^1.0.3",
     "zod": "^4.4.3"
   }
